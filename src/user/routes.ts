@@ -22,7 +22,7 @@ export class UserRoutes extends Route {
         body('password').isLength({ min: 5 }).withMessage('Must include password (5+ characters)'),
         bodyValidation.verifyBodyFieldsErrors,
         userMiddleware.validateSameEmailDoesntExist,
-        userController.createUser,
+        userController.createUser
       );
 
     this.app.param('userId', userMiddleware.extractUserId);
@@ -31,7 +31,7 @@ export class UserRoutes extends Route {
       .all(
         userMiddleware.validateUserExists,
         jwtMiddleware.validJWT,
-        permission.onlySameUserOrAdminCanDoThisAction,
+        permission.onlySameUserOrAdminCanDoThisAction
       )
       .get(userController.getUserById)
       .delete(userController.removeUser);
@@ -47,7 +47,7 @@ export class UserRoutes extends Route {
       userMiddleware.validateSameUserIsSameUser,
       userMiddleware.userCantChangePermission,
       permission.rolRequired(Rol.AUTHENTICATE),
-      userController.editUser,
+      userController.editUser
     ]);
 
     this.app.patch('/user/:userId', [
@@ -64,7 +64,7 @@ export class UserRoutes extends Route {
       userMiddleware.validatePatchEmail,
       userMiddleware.userCantChangePermission,
       permission.rolRequired(Rol.AUTHENTICATE),
-      userController.patchUser,
+      userController.patchUser
     ]);
 
     /**
@@ -76,10 +76,10 @@ export class UserRoutes extends Route {
       jwtMiddleware.validJWT,
       permission.rolRequired(
         // Rol.PUBLIC,
-        Rol.AUTHENTICATE,
+        Rol.AUTHENTICATE
         // Rol.ADMIN,
       ),
-      userController.updatePermissionRol,
+      userController.updatePermissionRol
     ]);
 
     return this.app;

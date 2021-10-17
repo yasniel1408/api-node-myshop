@@ -18,7 +18,7 @@ class DBSequelize {
   public getSequelize(): Sequelize {
     this.instanceSequelize = new Sequelize({
       dialect: 'sqlite',
-      storage: `${url}`,
+      storage: `${url}`
     });
     this.authenticateDB();
     this.syncDB();
