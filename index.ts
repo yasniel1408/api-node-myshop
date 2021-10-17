@@ -17,7 +17,6 @@ const app: express.Application = express();
 const server: http.Server = http.createServer(app);
 const port = process.env.PORT || 5000;
 const routes: Array<Route> = [];
-const sdf = 0;
 
 app.use(express.json());
 app.use(cors());
