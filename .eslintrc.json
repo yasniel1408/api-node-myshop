@@ -19,5 +19,6 @@
         "@typescript-eslint", "prettier"
     ],
     "rules": {
+      "no-console": "error"
     }
 }
