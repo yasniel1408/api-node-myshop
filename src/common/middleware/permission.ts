@@ -1,11 +1,11 @@
 import express from 'express';
-import { Rol } from './rol';
+import Rol from './rol';
 
 class Permission {
   rolRequired(rol: Rol) {
     return (req: express.Request, res: express.Response, next: express.NextFunction) => {
       try {
-        const userRol = parseInt(res.locals.jwt.rol);
+        const userRol = parseInt(res.locals.jwt.rol, 10);
         if (userRol === rol) {
           next();
         } else {
@@ -20,9 +20,9 @@ class Permission {
   onlySameUserOrAdminCanDoThisAction(
     req: express.Request,
     res: express.Response,
-    next: express.NextFunction,
+    next: express.NextFunction
   ) {
-    const userRol = parseInt(res.locals.jwt.rol);
+    const userRol = parseInt(res.locals.jwt.rol, 10);
     if (req.params && req.params.userId && req.params.userId === res.locals.jwt.userId) {
       return next();
     }

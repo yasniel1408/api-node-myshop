@@ -7,7 +7,7 @@ class BodyValidationMiddleware {
     if (!errors.isEmpty()) {
       return res.status(400).send({ errors: errors.array() });
     }
-    next();
+    return next();
   }
 }
 

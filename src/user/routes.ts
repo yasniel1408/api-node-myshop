@@ -3,7 +3,7 @@ import { body } from 'express-validator';
 import jwtMiddleware from '../auth/middleware/jwtMiddleware';
 import bodyValidation from '../common/middleware/bodyValidation';
 import permission from '../common/middleware/permission';
-import { Rol } from '../common/middleware/rol';
+import Rol from '../common/middleware/rol';
 import Route from '../common/routes';
 import userController from './controllers/userController';
 import userMiddleware from './middleware/userMiddleware';

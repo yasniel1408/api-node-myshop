@@ -26,7 +26,7 @@ app.use(helmet());
 routes.push(new AuthRoutes(app));
 routes.push(new UserRoutes(app));
 
-const messageExpressServer: String = `Server is listening on ${port}`;
+const messageExpressServer = `Server is listening on ${port}`;
 app.get('/', (req, res) => {
   res.send(messageExpressServer);
 });

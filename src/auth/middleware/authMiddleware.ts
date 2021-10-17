@@ -6,7 +6,7 @@ class AuthMiddleware {
   async verifyUserPassword(
     req: express.Request,
     res: express.Response,
-    next: express.NextFunction,
+    next: express.NextFunction
   ) {
     const user: any = await userService.getUserByEmail(req.body.email);
     if (user) {
@@ -15,12 +15,12 @@ class AuthMiddleware {
         req.body = {
           userId: user.id,
           email: user.email,
-          rol: user.rol,
+          rol: user.rol
         };
         return next();
       }
     }
-    res.status(400).send({ errors: ['Invalid email and/or password'] });
+    return res.status(400).send({ errors: ['Invalid email and/or password'] });
   }
 }
 

@@ -1,5 +1,5 @@
 import { PatchUserDto } from '../models/patchUserDto';
-import { Rol } from '../../common/middleware/rol';
+import Rol from '../../common/middleware/rol';
 import { CreateUserDto } from '../models/createUserDto';
 import { PutUserDto } from '../models/putUserDto';
 import UserDao from '../models/userDao';
@@ -13,7 +13,7 @@ class UserRepository implements CRUDRepository {
   async create(resource: CreateUserDto): Promise<string> {
     const user = new UserDao({
       ...resource,
-      rol: Rol.AUTHENTICATE,
+      rol: Rol.AUTHENTICATE
     });
     await user.save();
     return user.getDataValue('id');
@@ -33,7 +33,7 @@ class UserRepository implements CRUDRepository {
 
   async getByEmail(email: string): Promise<any> {
     const user = await UserDao.findOne({
-      where: { email },
+      where: { email }
     });
     return user;
   }

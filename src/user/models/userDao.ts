@@ -8,7 +8,7 @@ const UserDao = UserClass.init(
     id: {
       type: DataTypes.UUID,
       primaryKey: true,
-      defaultValue: DataTypes.UUIDV4,
+      defaultValue: DataTypes.UUIDV4
     },
     email: {
       type: DataTypes.STRING,
@@ -16,12 +16,12 @@ const UserDao = UserClass.init(
       unique: true,
       validate: {
         notNull: {
-          msg: 'Email is required!',
+          msg: 'Email is required!'
         },
         isEmail: {
-          msg: 'Email is not correct!',
-        },
-      },
+          msg: 'Email is not correct!'
+        }
+      }
     },
     password: {
       type: DataTypes.STRING,
@@ -30,33 +30,33 @@ const UserDao = UserClass.init(
         min: 6,
         max: 50,
         notNull: {
-          msg: 'Email is required!',
-        },
-      },
+          msg: 'Email is required!'
+        }
+      }
     },
     firstName: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: true
     },
     lastName: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: true
     },
     avatar: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: true
     },
     rol: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'Rol is required!',
-        },
-      },
-    },
+          msg: 'Rol is required!'
+        }
+      }
+    }
   },
-  { tableName: 'Users', sequelize: DBSequelize.getSequelize() },
+  { tableName: 'Users', sequelize: DBSequelize.getSequelize() }
 );
 
 export default UserDao;

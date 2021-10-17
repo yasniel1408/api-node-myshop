@@ -17,7 +17,7 @@ class JwtMiddleware {
   async validRefreshNeeded(
     req: express.Request,
     res: express.Response,
-    next: express.NextFunction,
+    next: express.NextFunction
   ) {
     const user: any = await userService.getUserByEmail(res.locals.jwt.email);
     const salt = crypto.createSecretKey(Buffer.from(res.locals.jwt.refreshKey.data));
@@ -29,7 +29,7 @@ class JwtMiddleware {
       req.body = {
         userId: user.id,
         email: user.email,
-        permissionFlags: user.permissionFlags,
+        permissionFlags: user.permissionFlags
       };
       return next();
     }
@@ -48,9 +48,8 @@ class JwtMiddleware {
       } catch (err) {
         return res.status(403).send(err);
       }
-    } else {
-      return res.status(401).send();
     }
+    return res.status(401).send();
   }
 }
 

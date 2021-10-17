@@ -10,7 +10,6 @@ if (process.env.NODE_ENV === 'test') {
 } else {
   url = process.env.DB_URI_PROD;
 }
-console.log(process.env.NODE_ENV);
 
 class DBSequelize {
   private instanceSequelize: Sequelize;

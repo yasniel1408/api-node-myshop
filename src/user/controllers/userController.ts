@@ -41,7 +41,7 @@ class UsersController {
 
   async updatePermissionRol(req: express.Request, res: express.Response) {
     const patchUserDto: PatchUserDto = {
-      rol: parseInt(req.params.rol),
+      rol: parseInt(req.params.rol, 10)
     };
     await userService.patchById(req.body.id, patchUserDto);
     res.status(204).send();
