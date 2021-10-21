@@ -17,13 +17,13 @@ export default class AuthRoutes extends Route {
       body('password').isString(),
       bodyValidation.verifyBodyFieldsErrors,
       authMiddleware.verifyUserPassword,
-      authController.createJWT,
+      authController.createJWT
     ]);
     this.app.post('/auth/refresh-token', [
       jwtMiddleware.validJWT,
       jwtMiddleware.verifyRefreshBodyField,
       jwtMiddleware.validRefreshNeeded,
-      authController.createJWT,
+      authController.createJWT
     ]);
     return this.app;
   }

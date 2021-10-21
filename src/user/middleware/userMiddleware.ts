@@ -1,4 +1,5 @@
 import express from 'express';
+import Rol from '../../common/middleware/rol';
 import userService from '../services/userService';
 
 class UsersMiddleware {
@@ -15,43 +16,16 @@ class UsersMiddleware {
     }
   }
 
-  async validateSameUserIsSameUser(
+  async validateSameUserIsSameUserOrAdmin(
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
   ) {
-    if (res.locals.user.id === req.params.userId) {
-      next();
-    } else {
-      res.status(400).send({ errors: ['Invalid email'] });
-    }
-  }
+    if (res.locals.user.id === req.params.userId) next();
+    if (res.locals.user.rol === Rol.ADMIN) next();
 
-  async userCantChangePermission(
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) {
-    if ('rol' in req.body && req.body.rol !== res.locals.user.rol) {
-      res.status(400).send({
-        errors: ['User cannot change permission']
-      });
-    } else {
-      next();
-    }
+    res.status(400).send({ errors: ['Invalid User'] });
   }
-
-  validatePatchEmail = async (
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) => {
-    if (req.body.email) {
-      this.validateSameUserIsSameUser(req, res, next);
-    } else {
-      next();
-    }
-  };
 
   async validateUserExists(
     req: express.Request,

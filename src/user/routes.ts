@@ -44,8 +44,7 @@ export class UserRoutes extends Route {
       body('avatar').isObject().optional(),
       body('rol').isInt().optional(),
       bodyValidation.verifyBodyFieldsErrors,
-      userMiddleware.validateSameUserIsSameUser,
-      userMiddleware.userCantChangePermission,
+      userMiddleware.validateSameUserIsSameUserOrAdmin,
       permission.rolRequired(Rol.AUTHENTICATE),
       userController.editUser
     ]);
@@ -61,8 +60,7 @@ export class UserRoutes extends Route {
       body('avatar').isObject().optional(),
       body('rol').isInt().optional(),
       bodyValidation.verifyBodyFieldsErrors,
-      userMiddleware.validatePatchEmail,
-      userMiddleware.userCantChangePermission,
+      userMiddleware.validateSameUserIsSameUserOrAdmin,
       permission.rolRequired(Rol.AUTHENTICATE),
       userController.patchUser
     ]);

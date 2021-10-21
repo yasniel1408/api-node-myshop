@@ -1,4 +1,5 @@
 import express from 'express';
+
 export default abstract class Route {
   app: express.Application;
 
