@@ -29,7 +29,7 @@ class JwtMiddleware {
       req.body = {
         userId: user.id,
         email: user.email,
-        permissionFlags: user.permissionFlags
+        permissionFlags: user.rol // AQUI ES ROL
       };
       return next();
     }
@@ -44,7 +44,7 @@ class JwtMiddleware {
           return res.status(401).send();
         }
         res.locals.jwt = jwt.verify(authorization[1], jwtSecret) as Jwt;
-        next();
+        return next(); // AQUI FALTO EL RETURN
       } catch (err) {
         return res.status(403).send(err);
       }
