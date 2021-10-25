@@ -1,10 +1,10 @@
 import { CreateUserDto } from '../models/createUserDto';
-import { PatchUserDto } from '../models/patchUserDto';
-import { PutUserDto } from '../models/putUserDto';
-import userRepository from '../repositories/userRepository';
 import { CRUDService } from '../../common/interfaces/crudService';
+import userRepository from '../repositories/userRepository';
+import { PutUserDto } from '../models/putUserDto';
+import { PatchUserDto } from '../models/patchUserDto';
 
-class UsersService implements CRUDService {
+class UserService implements CRUDService {
   async findAll(limit: number, page: number): Promise<any> {
     return userRepository.findAll(limit, page);
   }
@@ -13,7 +13,7 @@ class UsersService implements CRUDService {
     return userRepository.create(resource);
   }
 
-  async editById(id: string, resource: PutUserDto): Promise<string> {
+  async editById(id: string, resource: PutUserDto): Promise<any> {
     return userRepository.editById(id, resource);
   }
 
@@ -21,17 +21,17 @@ class UsersService implements CRUDService {
     return userRepository.getById(id);
   }
 
-  async getUserByEmail(email: string): Promise<any> {
-    return userRepository.getByEmail(email);
-  }
-
-  async deleteById(id: string): Promise<string> {
+  async deleteById(id: string): Promise<any> {
     return userRepository.deleteById(id);
   }
 
-  async patchById(id: string, resource: PatchUserDto): Promise<string> {
+  async patchById(id: string, resource: PatchUserDto): Promise<any> {
     return userRepository.editById(id, resource);
+  }
+
+  async getUserByEmail(email: string): Promise<any> {
+    return userRepository.getByEmail(email);
   }
 }
 
-export default new UsersService();
+export default new UserService();

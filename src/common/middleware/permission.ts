@@ -4,16 +4,11 @@ import Rol from './rol';
 class Permission {
   rolRequired(rol: Rol) {
     return (req: express.Request, res: express.Response, next: express.NextFunction) => {
-      try {
-        const userRol = parseInt(res.locals.jwt.rol, 10);
-        if (userRol === rol) {
-          next();
-        } else {
-          res.status(403).send();
-        }
-      } catch (err) {
-        console.log(err);
+      const userRol = parseInt(res.locals.jwt.rol, 10);
+      if (userRol === rol || rol === Rol.ADMIN) {
+        return next();
       }
+      return res.status(403).send();
     };
   }
 

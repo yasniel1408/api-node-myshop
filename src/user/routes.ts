@@ -29,7 +29,7 @@ export class UserRoutes extends Route {
     this.app
       .route('/user/:userId')
       .all(
-        userMiddleware.validateUserExists,
+        userMiddleware.validateUserExist,
         jwtMiddleware.validJWT,
         permission.onlySameUserOrAdminCanDoThisAction
       )
@@ -44,7 +44,7 @@ export class UserRoutes extends Route {
       body('avatar').isObject().optional(),
       body('rol').isInt().optional(),
       bodyValidation.verifyBodyFieldsErrors,
-      userMiddleware.validateSameUserIsSameUserOrAdmin,
+      userMiddleware.onlySameUserOrAdminCanDoThisAction,
       permission.rolRequired(Rol.AUTHENTICATE),
       userController.editUser
     ]);
@@ -60,7 +60,7 @@ export class UserRoutes extends Route {
       body('avatar').isObject().optional(),
       body('rol').isInt().optional(),
       bodyValidation.verifyBodyFieldsErrors,
-      userMiddleware.validateSameUserIsSameUserOrAdmin,
+      userMiddleware.onlySameUserOrAdminCanDoThisAction,
       permission.rolRequired(Rol.AUTHENTICATE),
       userController.patchUser
     ]);
