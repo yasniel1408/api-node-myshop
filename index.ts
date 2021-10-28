@@ -4,6 +4,7 @@ import express from 'express';
 import helmet from 'helmet';
 import * as http from 'http';
 import AuthRoutes from './src/auth/routes';
+import CategoryRoutes from './src/category/routes';
 import './src/common/db/DBSequelize';
 import Route from './src/common/routes';
 import UserRoutes from './src/user/routes';
@@ -25,6 +26,7 @@ app.use(helmet());
 // add routes
 routes.push(new AuthRoutes(app));
 routes.push(new UserRoutes(app));
+routes.push(new CategoryRoutes(app));
 
 const messageExpressServer = `Server is listening on ${port}`;
 app.get('/', (req, res) => {

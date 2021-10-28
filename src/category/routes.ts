@@ -16,8 +16,9 @@ export class CategoryRoutes extends Route {
   configureRoutes(): express.Application {
     this.app
       .route('/category')
-      .get(jwtMiddleware.validJWT, categoryController.listCategory)
+      .get(categoryController.listCategory)
       .post(
+        jwtMiddleware.validJWT,
         body('name').isString(),
         permission.rolRequired(Rol.ADMIN),
         bodyValidation.verifyBodyFieldsErrors,
@@ -27,12 +28,12 @@ export class CategoryRoutes extends Route {
     this.app.param('categoryId', helpers.extractId('categoryId'));
     this.app
       .route('/category/:categoryId')
-      .all(jwtMiddleware.validJWT)
       .get(categoryController.getCategoryById)
-      .delete(permission.rolRequired(Rol.ADMIN), categoryController.removeCategory);
-
-    this.app
-      .route('/category/:categoryId')
+      .delete(
+        jwtMiddleware.validJWT,
+        permission.rolRequired(Rol.ADMIN),
+        categoryController.removeCategory
+      )
       .all(
         jwtMiddleware.validJWT,
         body('name').isString(),
