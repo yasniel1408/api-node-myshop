@@ -1,4 +1,4 @@
-import { PatchUserDto } from '../models/patchCategoryDto';
+import { PatchCategoryDto } from '../models/patchCategoryDto';
 import { CRUDRepository } from '../../common/interfaces/crudRepository';
 import { PutCategoryDto } from '../models/putCategoryDto';
 import CategoryDao from '../models/CategoryDao.model';
@@ -14,7 +14,7 @@ class CategoryRepository implements CRUDRepository {
     return category.getDataValue('id');
   }
 
-  async editById(id: string, resource: PutCategoryDto | PatchUserDto): Promise<any> {
+  async editById(id: string, resource: PutCategoryDto | PatchCategoryDto): Promise<any> {
     const category = await CategoryDao.findByPk(id);
     category.setAttributes(resource);
     await category.save();

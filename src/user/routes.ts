@@ -2,6 +2,7 @@ import express from 'express';
 import { body } from 'express-validator';
 import jwtMiddleware from '../auth/middleware/jwtMiddleware';
 import bodyValidation from '../common/middleware/bodyValidation';
+import helpers from '../common/middleware/helpers';
 import permission from '../common/middleware/permission';
 import Rol from '../common/middleware/rol';
 import Route from '../common/routes';
@@ -25,7 +26,7 @@ export class UserRoutes extends Route {
         userController.createUser
       );
 
-    this.app.param('userId', userMiddleware.extractUserId);
+    this.app.param('userId', helpers.extractId('userId'));
     this.app
       .route('/user/:userId')
       .all(

@@ -1,3 +1,3 @@
 import { PutCategoryDto } from './putCategoryDto';
 
-export type PatchUserDto = Partial<PutCategoryDto>;
+export type PatchCategoryDto = Partial<PutCategoryDto>;

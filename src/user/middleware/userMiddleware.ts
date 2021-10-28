@@ -15,11 +15,6 @@ class UserMiddleware {
     return next();
   }
 
-  async extractUserId(req: express.Request, res: express.Response, next: express.NextFunction) {
-    req.body.id = req.params.userId;
-    return next();
-  }
-
   async validateUserExist(req: express.Request, res: express.Response, next: express.NextFunction) {
     const user = await userService.getById(req.params.userId);
     if (user) {
