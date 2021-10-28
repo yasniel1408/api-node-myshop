@@ -18,7 +18,13 @@ class DBSequelize {
     this.instanceSequelize = new Sequelize({
       dialect: 'sqlite',
       storage: `${url}`,
-      models: [`${__dirname}/../../../**/*.model.ts`]
+      models: [`${__dirname}/../../../**/*.model.ts`],
+      pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+      }
     });
     this.authenticateDB();
     this.syncDB();
@@ -30,7 +36,8 @@ class DBSequelize {
   }
 
   private async syncDB() {
-    await this.instanceSequelize.sync({ force: true });
+    // await this.instanceSequelize.sync({ force: true });
+    await this.instanceSequelize.sync();
     console.log('Drop and re-sync db.');
   }
 }

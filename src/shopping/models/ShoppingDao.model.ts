@@ -2,10 +2,11 @@ import {
   Table,
   Column,
   Model,
-  DataType,
   CreatedAt,
-  ForeignKey,
-  PrimaryKey
+  BelongsTo,
+  AllowNull,
+  PrimaryKey,
+  ForeignKey
 } from 'sequelize-typescript';
 import ProductDao from '../../product/models/ProductDao.model';
 import UserDao from '../../user/models/UserDao.model';
@@ -14,15 +15,8 @@ import UserDao from '../../user/models/UserDao.model';
   tableName: 'shopping'
 })
 class ShoppingDao extends Model {
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-    validate: {
-      notNull: {
-        msg: 'paymentType is required!'
-      }
-    }
-  })
+  @AllowNull(false)
+  @Column
   paymentType: string;
 
   @CreatedAt
@@ -33,10 +27,16 @@ class ShoppingDao extends Model {
   @Column
   productId: number;
 
+  @BelongsTo(() => ProductDao, 'productId')
+  product: ProductDao;
+
   @ForeignKey(() => UserDao)
   @PrimaryKey
   @Column
   userId: number;
+
+  @BelongsTo(() => UserDao, 'userId')
+  user: UserDao;
 }
 
 export default ShoppingDao;

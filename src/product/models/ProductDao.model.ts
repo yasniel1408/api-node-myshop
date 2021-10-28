@@ -1,11 +1,17 @@
 import {
   Column,
-  DataType,
   Model,
   Table,
   HasMany,
   CreatedAt,
-  ForeignKey
+  ForeignKey,
+  IsUrl,
+  IsUUID,
+  PrimaryKey,
+  Unique,
+  IsNull,
+  AllowNull,
+  BelongsTo
 } from 'sequelize-typescript';
 import CategoryDao from '../../category/models/CategoryDao.model';
 import ShoppingDao from '../../shopping/models/ShoppingDao.model';
@@ -14,66 +20,43 @@ import ShoppingDao from '../../shopping/models/ShoppingDao.model';
   tableName: 'product'
 })
 class ProductDao extends Model {
-  @Column({
-    type: DataType.UUID,
-    defaultValue: DataType.UUIDV4,
-    primaryKey: true
-  })
+  @IsUUID(4)
+  @PrimaryKey
+  @Column
   id: string;
 
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-    validate: {
-      notNull: {
-        msg: 'Name is required!'
-      }
-    }
-  })
+  @AllowNull(false)
+  @Unique
+  @Column
   name: string;
 
-  @Column({
-    type: DataType.STRING,
-    allowNull: true
-  })
+  @IsUrl
+  @AllowNull
+  @Column
   photo: string;
 
-  @Column({
-    type: DataType.DOUBLE,
-    allowNull: false,
-    validate: {
-      notNull: {
-        msg: 'Price is required!'
-      }
-    }
-  })
-  price: string;
+  @AllowNull(false)
+  @Column
+  price: number;
 
-  @Column({
-    type: DataType.NUMBER,
-    allowNull: false,
-    validate: {
-      notNull: {
-        msg: 'Amount is required!'
-      }
-    }
-  })
-  amount: string;
+  @AllowNull(false)
+  @Column
+  amount: number;
 
-  @Column({
-    type: DataType.TEXT
-  })
+  @Column
   description: string;
 
   @CreatedAt
   createdAt: Date;
 
-  @HasMany(() => ShoppingDao)
+  @HasMany(() => ShoppingDao, 'productId')
   shoppings: ShoppingDao[];
 
-  @ForeignKey(() => CategoryDao)
-  @Column
-  categoryId: number;
+  // @ForeignKey(() => CategoryDao)
+  // @Column
+  // categoryId: number;
+  @BelongsTo(() => CategoryDao, 'categoryId')
+  category: CategoryDao;
 }
 
 export default ProductDao;

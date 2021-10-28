@@ -2,6 +2,7 @@ import { PatchCategoryDto } from '../models/patchCategoryDto';
 import { CRUDRepository } from '../../common/interfaces/crudRepository';
 import { PutCategoryDto } from '../models/putCategoryDto';
 import CategoryDao from '../models/CategoryDao.model';
+import ProductDao from '../../product/models/ProductDao.model';
 
 class CategoryRepository implements CRUDRepository {
   async findAll(limit: number, page: number): Promise<any> {
@@ -22,7 +23,7 @@ class CategoryRepository implements CRUDRepository {
   }
 
   async getById(id: string): Promise<any> {
-    const category = await CategoryDao.findByPk(id);
+    const category = await CategoryDao.findByPk(id, { include: [ProductDao] });
     return category;
   }
 

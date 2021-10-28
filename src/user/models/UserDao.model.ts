@@ -1,78 +1,60 @@
-import { Table, Column, Model, HasMany, DataType, CreatedAt } from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  Model,
+  HasMany,
+  CreatedAt,
+  PrimaryKey,
+  IsUUID,
+  Length,
+  NotNull,
+  IsEmail,
+  Unique,
+  IsNull,
+  AllowNull
+} from 'sequelize-typescript';
 import ShoppingDao from '../../shopping/models/ShoppingDao.model';
 
 @Table({
   tableName: 'user'
 })
 class UserDao extends Model {
-  @Column({
-    type: DataType.UUID,
-    defaultValue: DataType.UUIDV4,
-    primaryKey: true
-  })
+  @IsUUID(4)
+  @PrimaryKey
+  @Column
   id: string;
 
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-    unique: true,
-    validate: {
-      notNull: {
-        msg: 'Email is required!'
-      },
-      isEmail: {
-        msg: 'Email is not correct!'
-      }
-    }
-  })
+  @IsEmail
+  @AllowNull(false)
+  @Unique
+  @Column
   email: string;
 
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-    validate: {
-      min: 6,
-      max: 50,
-      notNull: {
-        msg: 'Password is required!'
-      }
-    }
-  })
+  @Length({ min: 6, max: 50 })
+  @AllowNull(false)
+  @Column
   password: string;
 
-  @Column({
-    type: DataType.STRING,
-    allowNull: true
-  })
+  @AllowNull
+  @Column
   firstName: string;
 
-  @Column({
-    type: DataType.STRING,
-    allowNull: true
-  })
+  @AllowNull
+  @Column
   lastName: string;
 
-  @Column({
-    type: DataType.STRING,
-    allowNull: true
-  })
+  @AllowNull
+  @Column
   avatar: string;
 
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-    validate: {
-      notNull: {
-        msg: 'Rol is required!'
-      }
-    }
-  })
+  @AllowNull(false)
+  @Column
   rol: string;
 
   @CreatedAt
   createdAt: Date;
 
-  @HasMany(() => ShoppingDao)
+  @HasMany(() => ShoppingDao, 'userId')
   hobbies: ShoppingDao[];
 }
 
