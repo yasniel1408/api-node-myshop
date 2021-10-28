@@ -15,8 +15,8 @@ jobs:
         run: yarn
       - name: Run the project
         run: |
-          yarn build,
-          yarn test
+          yarn run build,
+          yarn run test
       - name: Code linting
         run: |
           yarn add eslint,

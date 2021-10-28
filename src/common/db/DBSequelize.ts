@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import { Sequelize } from 'sequelize';
+import { Sequelize } from 'sequelize-typescript';
 
 dotenv.config();
 let url = '';
@@ -14,14 +14,14 @@ if (process.env.NODE_ENV === 'test') {
 class DBSequelize {
   private instanceSequelize: Sequelize;
 
-  public getSequelize(): Sequelize {
+  constructor() {
     this.instanceSequelize = new Sequelize({
       dialect: 'sqlite',
-      storage: `${url}`
+      storage: `${url}`,
+      models: [`${__dirname}/../../../**/*.model.ts`]
     });
     this.authenticateDB();
     this.syncDB();
-    return this.instanceSequelize;
   }
 
   private async authenticateDB() {
@@ -30,7 +30,7 @@ class DBSequelize {
   }
 
   private async syncDB() {
-    await this.instanceSequelize.sync();
+    await this.instanceSequelize.sync({ force: true });
     console.log('Drop and re-sync db.');
   }
 }
