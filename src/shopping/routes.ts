@@ -4,6 +4,7 @@ import helpers from '../common/middleware/helpers';
 import permission from '../common/middleware/permission';
 import Rol from '../common/middleware/rol';
 import Route from '../common/routes';
+import userMiddleware from '../user/middleware/userMiddleware';
 import shoppingController from './controllers/shoppingController';
 
 export class ShoppingRoutes extends Route {
@@ -12,7 +13,13 @@ export class ShoppingRoutes extends Route {
   }
 
   configureRoutes(): express.Application {
-    this.app.route('/shopping').get(shoppingController.listShopping);
+    this.app
+      .route('/shopping')
+      .get(
+        jwtMiddleware.validJWT,
+        userMiddleware.onlySameUserOrAdminCanDoThisAction,
+        shoppingController.listShopping
+      );
 
     this.app.param('shoppingId', helpers.extractId('shoppingId'));
     this.app
