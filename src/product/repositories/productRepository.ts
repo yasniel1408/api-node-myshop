@@ -5,7 +5,11 @@ import ProductDao from '../models/productDao.model';
 
 class ProductRepository implements CRUDRepository {
   async findAll(limit: number, page: number): Promise<any> {
-    return ProductDao.findAndCountAll({ limit, offset: page });
+    return ProductDao.findAndCountAll({
+      limit,
+      offset: page,
+      include: [{ all: true, nested: true }]
+    });
   }
 
   async create(resource: any): Promise<any> {
@@ -22,7 +26,7 @@ class ProductRepository implements CRUDRepository {
   }
 
   async getById(id: string): Promise<any> {
-    const product = await ProductDao.findByPk(id);
+    const product = await ProductDao.findByPk(id, { include: [{ all: true, nested: true }] });
     return product;
   }
 
