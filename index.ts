@@ -5,7 +5,7 @@ import helmet from 'helmet';
 import * as http from 'http';
 import AuthRoutes from './src/auth/routes';
 import CategoryRoutes from './src/category/routes';
-import './src/common/db/DBSequelize';
+import './src/common/db/dbSequelize';
 import Route from './src/common/routes';
 import UserRoutes from './src/user/routes';
 

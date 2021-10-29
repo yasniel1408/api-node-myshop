@@ -1,8 +1,8 @@
 import { PatchCategoryDto } from '../models/patchCategoryDto';
 import { CRUDRepository } from '../../common/interfaces/crudRepository';
 import { PutCategoryDto } from '../models/putCategoryDto';
-import CategoryDao from '../models/CategoryDao.model';
-import ProductDao from '../../product/models/ProductDao.model';
+import CategoryDao from '../models/categoryDao.model';
+import ProductDao from '../../product/models/productDao.model';
 
 class CategoryRepository implements CRUDRepository {
   async findAll(limit: number, page: number): Promise<any> {

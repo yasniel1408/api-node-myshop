@@ -9,7 +9,7 @@ import {
   Unique,
   AllowNull
 } from 'sequelize-typescript';
-import ProductDao from '../../product/models/ProductDao.model';
+import ProductDao from '../../product/models/productDao.model';
 
 @Table({
   tableName: 'category'

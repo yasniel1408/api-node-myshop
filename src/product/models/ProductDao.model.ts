@@ -13,7 +13,7 @@ import {
   AllowNull,
   BelongsTo
 } from 'sequelize-typescript';
-import CategoryDao from '../../category/models/CategoryDao.model';
+import CategoryDao from '../../category/models/categoryDao.model';
 import ShoppingDao from '../../shopping/models/ShoppingDao.model';
 
 @Table({

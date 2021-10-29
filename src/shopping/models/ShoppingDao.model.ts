@@ -8,8 +8,8 @@ import {
   PrimaryKey,
   ForeignKey
 } from 'sequelize-typescript';
-import ProductDao from '../../product/models/ProductDao.model';
-import UserDao from '../../user/models/UserDao.model';
+import ProductDao from '../../product/models/productDao.model';
+import UserDao from '../../user/models/userDao.model';
 
 @Table({
   tableName: 'shopping'

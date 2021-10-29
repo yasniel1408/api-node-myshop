@@ -2,7 +2,7 @@ import { PatchUserDto } from '../models/patchUserDto';
 import Rol from '../../common/middleware/rol';
 import { CRUDRepository } from '../../common/interfaces/crudRepository';
 import { PutUserDto } from '../models/putUserDto';
-import UserDao from '../models/UserDao.model';
+import UserDao from '../models/userDao.model';
 
 class UserRepository implements CRUDRepository {
   async findAll(limit: number, page: number): Promise<any> {
