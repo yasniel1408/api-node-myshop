@@ -4,12 +4,10 @@ import {
   Table,
   HasMany,
   CreatedAt,
-  ForeignKey,
   IsUrl,
   IsUUID,
   PrimaryKey,
   Unique,
-  IsNull,
   AllowNull,
   BelongsTo
 } from 'sequelize-typescript';
