@@ -8,8 +8,8 @@ class CategoryController {
   }
 
   async getCategoryById(req: express.Request, res: express.Response) {
-    const user = await categoryService.getById(req.body.id);
-    return res.status(200).send(user);
+    const category = await categoryService.getById(req.body.id);
+    return res.status(200).send(category);
   }
 
   async createCategory(req: express.Request, res: express.Response) {

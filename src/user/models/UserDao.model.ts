@@ -2,16 +2,14 @@ import {
   Table,
   Column,
   Model,
-  HasMany,
   CreatedAt,
   PrimaryKey,
   IsUUID,
   Length,
-  NotNull,
   IsEmail,
   Unique,
-  IsNull,
-  AllowNull
+  AllowNull,
+  HasMany
 } from 'sequelize-typescript';
 import ShoppingDao from '../../shopping/models/shoppingDao.model';
 
@@ -55,7 +53,7 @@ class UserDao extends Model {
   createdAt: Date;
 
   @HasMany(() => ShoppingDao, 'userId')
-  hobbies: ShoppingDao[];
+  shoppings: ShoppingDao[];
 }
 
 export default UserDao;

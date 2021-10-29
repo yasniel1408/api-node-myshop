@@ -8,8 +8,8 @@ class ProductController {
   }
 
   async getProductById(req: express.Request, res: express.Response) {
-    const user = await productService.getById(req.body.id);
-    return res.status(200).send(user);
+    const product = await productService.getById(req.body.id);
+    return res.status(200).send(product);
   }
 
   async createProduct(req: express.Request, res: express.Response) {

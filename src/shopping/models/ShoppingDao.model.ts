@@ -15,6 +15,16 @@ import UserDao from '../../user/models/userDao.model';
   tableName: 'shopping'
 })
 class ShoppingDao extends Model {
+  @ForeignKey(() => ProductDao)
+  @PrimaryKey
+  @Column
+  productId: number;
+
+  @ForeignKey(() => UserDao)
+  @PrimaryKey
+  @Column
+  userId: number;
+
   @AllowNull(false)
   @Column
   paymentType: string;
@@ -22,18 +32,8 @@ class ShoppingDao extends Model {
   @CreatedAt
   createdAt: Date;
 
-  @ForeignKey(() => ProductDao)
-  @PrimaryKey
-  @Column
-  productId: number;
-
   @BelongsTo(() => ProductDao, 'productId')
   product: ProductDao;
-
-  @ForeignKey(() => UserDao)
-  @PrimaryKey
-  @Column
-  userId: number;
 
   @BelongsTo(() => UserDao, 'userId')
   user: UserDao;

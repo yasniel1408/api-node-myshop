@@ -2,14 +2,14 @@ import {
   Column,
   Model,
   Table,
-  HasMany,
   CreatedAt,
   IsUrl,
   IsUUID,
   PrimaryKey,
   Unique,
   AllowNull,
-  BelongsTo
+  BelongsTo,
+  HasMany
 } from 'sequelize-typescript';
 import CategoryDao from '../../category/models/categoryDao.model';
 import ShoppingDao from '../../shopping/models/shoppingDao.model';
@@ -50,9 +50,6 @@ class ProductDao extends Model {
   @HasMany(() => ShoppingDao, 'productId')
   shoppings: ShoppingDao[];
 
-  // @ForeignKey(() => CategoryDao)
-  // @Column
-  // categoryId: number;
   @BelongsTo(() => CategoryDao, 'categoryId')
   category: CategoryDao;
 }

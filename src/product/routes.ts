@@ -20,6 +20,10 @@ export class ProductRoutes extends Route {
       .post(
         jwtMiddleware.validJWT,
         body('name').isString(),
+        body('photo').isString().optional(),
+        body('price').isNumeric(),
+        body('amount').isNumeric(),
+        body('description').isString().optional(),
         permission.rolRequired(Rol.ADMIN),
         bodyValidation.verifyBodyFieldsErrors,
         productController.createProduct
@@ -37,10 +41,24 @@ export class ProductRoutes extends Route {
       .all(
         jwtMiddleware.validJWT,
         body('name').isString(),
+        body('photo').isString(),
+        body('price').isNumeric(),
+        body('amount').isNumeric(),
+        body('description').isString(),
         bodyValidation.verifyBodyFieldsErrors,
         permission.rolRequired(Rol.ADMIN)
       )
       .put(productController.editProduct)
+      .all(
+        jwtMiddleware.validJWT,
+        body('name').isString().optional(),
+        body('photo').isString().optional(),
+        body('price').isNumeric().optional(),
+        body('amount').isNumeric().optional(),
+        body('description').isString().optional(),
+        bodyValidation.verifyBodyFieldsErrors,
+        permission.rolRequired(Rol.ADMIN)
+      )
       .patch(productController.patchProduct);
 
     return this.app;

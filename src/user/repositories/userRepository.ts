@@ -6,7 +6,7 @@ import UserDao from '../models/userDao.model';
 
 class UserRepository implements CRUDRepository {
   async findAll(limit: number, page: number): Promise<any> {
-    return UserDao.findAndCountAll({ limit, offset: page });
+    return UserDao.findAndCountAll({ limit, offset: page, include: [{ all: true, nested: true }] });
   }
 
   async create(resource: any): Promise<any> {

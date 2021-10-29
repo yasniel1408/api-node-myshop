@@ -8,6 +8,7 @@ import CategoryRoutes from './src/category/routes';
 import './src/common/db/dbSequelize';
 import Route from './src/common/routes';
 import ProductRoutes from './src/product/routes';
+import ShoppingRoutes from './src/shopping/routes';
 import UserRoutes from './src/user/routes';
 
 const dotenvResult = dotenv.config();
@@ -29,6 +30,7 @@ routes.push(new AuthRoutes(app));
 routes.push(new UserRoutes(app));
 routes.push(new CategoryRoutes(app));
 routes.push(new ProductRoutes(app));
+routes.push(new ShoppingRoutes(app));
 
 const messageExpressServer = `Server is listening on ${port}`;
 app.get('/', (req, res) => {

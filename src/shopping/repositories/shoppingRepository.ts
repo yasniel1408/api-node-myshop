@@ -1,7 +1,7 @@
 import { PatchShoppingDto } from '../models/patchShoppingDto';
 import { CRUDRepository } from '../../common/interfaces/crudRepository';
 import { PutShoppingDto } from '../models/putShoppingDto';
-import ShoppingDao from '../models/ShoppingDao.model';
+import ShoppingDao from '../models/shoppingDao.model';
 
 class ShoppingRepository implements CRUDRepository {
   async findAll(limit: number, page: number): Promise<any> {
