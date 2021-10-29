@@ -14,7 +14,7 @@ import {
   BelongsTo
 } from 'sequelize-typescript';
 import CategoryDao from '../../category/models/categoryDao.model';
-import ShoppingDao from '../../shopping/models/ShoppingDao.model';
+import ShoppingDao from '../../shopping/models/shoppingDao.model';
 
 @Table({
   tableName: 'product'

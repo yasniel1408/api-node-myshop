@@ -13,7 +13,7 @@ import {
   IsNull,
   AllowNull
 } from 'sequelize-typescript';
-import ShoppingDao from '../../shopping/models/ShoppingDao.model';
+import ShoppingDao from '../../shopping/models/shoppingDao.model';
 
 @Table({
   tableName: 'user'
