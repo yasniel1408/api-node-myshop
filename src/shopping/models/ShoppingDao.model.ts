@@ -2,7 +2,6 @@ import {
   Table,
   Column,
   Model,
-  CreatedAt,
   BelongsTo,
   AllowNull,
   PrimaryKey,
@@ -28,9 +27,6 @@ class ShoppingDao extends Model {
   @AllowNull(false)
   @Column
   paymentType: string;
-
-  @CreatedAt
-  createdAt: Date;
 
   @BelongsTo(() => ProductDao, 'productId')
   product: ProductDao;

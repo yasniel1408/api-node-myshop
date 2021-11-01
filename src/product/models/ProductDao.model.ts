@@ -9,7 +9,8 @@ import {
   Unique,
   AllowNull,
   BelongsTo,
-  HasMany
+  HasMany,
+  DataType
 } from 'sequelize-typescript';
 import CategoryDao from '../../category/models/categoryDao.model';
 import ShoppingDao from '../../shopping/models/shoppingDao.model';
@@ -18,9 +19,11 @@ import ShoppingDao from '../../shopping/models/shoppingDao.model';
   tableName: 'product'
 })
 class ProductDao extends Model {
-  @IsUUID(4)
   @PrimaryKey
-  @Column
+  @Column({
+    type: DataType.STRING(50),
+    defaultValue: DataType.UUIDV4
+  })
   id: string;
 
   @AllowNull(false)
@@ -43,9 +46,6 @@ class ProductDao extends Model {
 
   @Column
   description: string;
-
-  @CreatedAt
-  createdAt: Date;
 
   @HasMany(() => ShoppingDao, 'productId')
   shoppings: ShoppingDao[];

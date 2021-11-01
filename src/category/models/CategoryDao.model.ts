@@ -5,9 +5,9 @@ import {
   HasMany,
   IsUUID,
   PrimaryKey,
-  NotNull,
   Unique,
-  AllowNull
+  AllowNull,
+  DataType
 } from 'sequelize-typescript';
 import ProductDao from '../../product/models/productDao.model';
 
@@ -15,9 +15,11 @@ import ProductDao from '../../product/models/productDao.model';
   tableName: 'category'
 })
 class CategoryDao extends Model {
-  @IsUUID(4)
   @PrimaryKey
-  @Column
+  @Column({
+    type: DataType.STRING(50),
+    defaultValue: DataType.UUIDV4
+  })
   id: string;
 
   @AllowNull(false)

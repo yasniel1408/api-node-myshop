@@ -9,7 +9,8 @@ import {
   IsEmail,
   Unique,
   AllowNull,
-  HasMany
+  HasMany,
+  DataType
 } from 'sequelize-typescript';
 import ShoppingDao from '../../shopping/models/shoppingDao.model';
 
@@ -17,9 +18,11 @@ import ShoppingDao from '../../shopping/models/shoppingDao.model';
   tableName: 'user'
 })
 class UserDao extends Model {
-  @IsUUID(4)
   @PrimaryKey
-  @Column
+  @Column({
+    type: DataType.STRING(50),
+    defaultValue: DataType.UUIDV4
+  })
   id: string;
 
   @IsEmail
@@ -48,9 +51,6 @@ class UserDao extends Model {
   @AllowNull(false)
   @Column
   rol: string;
-
-  @CreatedAt
-  createdAt: Date;
 
   @HasMany(() => ShoppingDao, 'userId')
   shoppings: ShoppingDao[];

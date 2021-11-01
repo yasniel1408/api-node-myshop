@@ -19,7 +19,8 @@ export class ShoppingRoutes extends Route {
         jwtMiddleware.validJWT,
         userMiddleware.onlySameUserOrAdminCanDoThisAction,
         shoppingController.listShopping
-      );
+      )
+      .post(jwtMiddleware.validJWT, shoppingController.createShopping);
 
     this.app.param('shoppingId', helpers.extractId('shoppingId'));
     this.app
