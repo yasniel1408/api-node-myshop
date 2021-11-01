@@ -31,7 +31,6 @@ class UserDao extends Model {
   @Column
   email: string;
 
-  @Length({ min: 6, max: 50 })
   @AllowNull(false)
   @Column
   password: string;
