@@ -5,7 +5,7 @@ class Permission {
   rolRequired(rol: Rol) {
     return (req: express.Request, res: express.Response, next: express.NextFunction) => {
       const userRol = parseInt(res.locals.jwt.rol, 10);
-      if (userRol === rol || rol === Rol.ADMIN) {
+      if (userRol === rol) {
         return next();
       }
       return res.status(403).send();
