@@ -3,3 +3,5 @@ dist
 .env
 yarn.lock
 .eslintcache
+combined.log
+error.log
