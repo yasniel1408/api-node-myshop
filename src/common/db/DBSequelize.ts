@@ -1,5 +1,8 @@
 import dotenv from 'dotenv';
 import { Sequelize } from 'sequelize-typescript';
+import debug from 'debug';
+
+const log: debug.IDebugger = debug('app:sequelize-connection');
 
 dotenv.config();
 let url = '';
@@ -26,19 +29,20 @@ class DBSequelize {
         idle: 10000
       }
     });
+
     this.authenticateDB();
-    this.syncDB();
+    // this.syncDB();
   }
 
   private async authenticateDB() {
     await this.instanceSequelize.authenticate();
-    console.log('Connection has been established successfully.');
+    log('Connection has been established successfully.');
   }
 
   private async syncDB() {
     // await this.instanceSequelize.sync({ force: true });
     await this.instanceSequelize.sync();
-    console.log('Drop and re-sync db.');
+    log('Drop and re-sync db.');
   }
 }
 
