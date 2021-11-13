@@ -1,0 +1,22 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Doc API - MyShop",
+    "description": "API Documentation for MyShop Applications"
+  },
+  "host": "http://localhost:5000",
+  "basePath": "",
+  "tags": [
+    {
+      "name": "",
+      "description": ""
+    }
+  ],
+  "schemes": [],
+  "securityDefinitions": {},
+  "consumes": [],
+  "produces": [],
+  "paths": {},
+  "definitions": {}
+}
