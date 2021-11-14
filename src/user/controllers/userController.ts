@@ -4,18 +4,6 @@ import userService from '../services/userService';
 import { PatchUserDto } from '../models/patchUserDto';
 
 class UsersController {
-  // #swagger.tags = ['Users']
-  // #swagger.summary = 'Your summary here'
-  // #swagger.description = 'Endpoint used to obtain a user.'
-  // #swagger.operationId = 'Your_operationId_here'
-  /* #swagger.parameters['parameterName'] = {
-        in: <string>,
-        description: <string>,
-        required: <boolean>,
-        type: <string>,
-        format: <string>,
-        schema: <object> or <Array>
-} */
   async listUsers(req: express.Request, res: express.Response) {
     const users = await userService.findAll(req.body.limit || 100, req.body.page || 0);
     return res.status(200).send(users);
