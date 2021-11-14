@@ -21,7 +21,16 @@ const doc = {
     }
     // { ... }
   ],
-  securityDefinitions: {}, // by default: empty object (Swagger 2.0)
+  securityDefinitions: {
+    info: {
+      title: 'Doc API - MyShop',
+      description: 'API Documentation for MyShop Applications',
+      contact: {
+        name: 'Yasniel Fajardo Egues',
+        url: 'https://infsoft.home.blog'
+      }
+    }
+  }, // by default: empty object (Swagger 2.0)
   definitions: {}, // by default: empty object
   components: {} // by default: empty object (OpenAPI 3.x)
 };
