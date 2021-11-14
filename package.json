@@ -32,9 +32,6 @@
     "sequelize-typescript": "^2.1.1",
     "shortid": "^2.2.16",
     "sqlite3": "^5.0.2",
-    "swagger-autogen": "^2.12.6",
-    "swagger-jsdoc": "^6.1.0",
-    "swagger-ui-express": "^4.1.6",
     "ts-custom-error": "^3.2.0"
   },
   "devDependencies": {
