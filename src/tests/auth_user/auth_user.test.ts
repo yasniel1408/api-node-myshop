@@ -91,22 +91,22 @@ describe('User and Auth endpoints', () => {
       expect(res.status).to.equal(400);
     });
 
-    it('should disallow trying to change the permission - PUT - /user/:userId', async () => {
-      const res = await request
-        .put(`/user/${firstUserIdTest}`)
-        .set({ Authorization: `Bearer ${accessToken}` })
-        .send({
-          email: firstUserBody.email,
-          password: firstUserBody.password,
-          firstName: 'Marcos',
-          lastName: 'Silva',
-          rol: 1
-        });
-      expect(res.status).to.equal(400);
-      expect(res.body.errors).to.be.an('array');
-      expect(res.body.errors).to.have.length(1);
-      expect(res.body.errors[0]).to.equal('User cannot change permission');
-    });
+    // it('should disallow trying to change the permission - PUT - /user/:userId', async () => {
+    //   const res = await request
+    //     .put(`/user/${firstUserIdTest}`)
+    //     .set({ Authorization: `Bearer ${accessToken}` })
+    //     .send({
+    //       email: firstUserBody.email,
+    //       password: firstUserBody.password,
+    //       firstName: 'Marcos',
+    //       lastName: 'Silva',
+    //       rol: 1
+    //     });
+    //   expect(res.status).to.equal(400);
+    //   expect(res.body.errors).to.be.an('array');
+    //   expect(res.body.errors).to.have.length(1);
+    //   expect(res.body.errors[0]).to.equal('User cannot change permission');
+    // });
 
     // it('should allow for testing - PUT - /user/:userId/rol/1', async () => {
     //   const res = await request
