@@ -108,13 +108,13 @@ describe('User and Auth endpoints', () => {
       expect(res.body.errors[0]).to.equal('User cannot change permission');
     });
 
-    it('should allow for testing - PUT - /user/:userId/rol/1', async () => {
-      const res = await request
-        .put(`/user/${firstUserIdTest}/rol/1`)
-        .set({ Authorization: `Bearer ${accessToken}` })
-        .send({});
-      expect(res.status).to.equal(204);
-    });
+    // it('should allow for testing - PUT - /user/:userId/rol/1', async () => {
+    //   const res = await request
+    //     .put(`/user/${firstUserIdTest}/rol/1`)
+    //     .set({ Authorization: `Bearer ${accessToken}` })
+    //     .send({});
+    //   expect(res.status).to.equal(204);
+    // });
 
     //   describe('with a new set of permission', () => {
     //     it('should allow a refresh token - POST - /auth/refresh-token', async () => {
