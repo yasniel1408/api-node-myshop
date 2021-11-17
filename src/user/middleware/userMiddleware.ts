@@ -15,6 +15,20 @@ class UserMiddleware {
     return next();
   }
 
+  async userCantChangePermission(
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) {
+    if ('rol' in req.body && req.body.rol !== res.locals.user.rol) {
+      res.status(400).send({
+        errors: ['User cannot change permission']
+      });
+    } else {
+      next();
+    }
+  }
+
   async validateUserExist(req: express.Request, res: express.Response, next: express.NextFunction) {
     const user = await userService.getById(req.params.userId);
     if (user) {

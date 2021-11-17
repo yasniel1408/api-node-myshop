@@ -16,6 +16,7 @@ let refreshToken = '';
 const newFirstName = 'Jose';
 const newFirstName2 = 'Paulo';
 const newLastName2 = 'Faraco';
+const newAvatar2 = 'paulo.jpg';
 
 let request: supertest.SuperAgentTest;
 beforeEach(async () => {
@@ -78,7 +79,7 @@ describe('User and Auth endpoints', () => {
       expect(res.status).to.equal(403);
     });
 
-    it('should disallow edit an nonexistent ID - PUT - /user/:userId', async () => {
+    it('should disallow edit a nonexistent ID - PUT - /user/:userId', async () => {
       const res = await request
         .put('/user/i-do-not-exist')
         .set({ Authorization: `Bearer ${accessToken}` })
@@ -91,77 +92,80 @@ describe('User and Auth endpoints', () => {
       expect(res.status).to.equal(400);
     });
 
-    // it('should disallow trying to change the permission - PUT - /user/:userId', async () => {
-    //   const res = await request
-    //     .put(`/user/${firstUserIdTest}`)
-    //     .set({ Authorization: `Bearer ${accessToken}` })
-    //     .send({
-    //       email: firstUserBody.email,
-    //       password: firstUserBody.password,
-    //       firstName: 'Marcos',
-    //       lastName: 'Silva',
-    //       rol: 1
-    //     });
-    //   expect(res.status).to.equal(400);
-    //   expect(res.body.errors).to.be.an('array');
-    //   expect(res.body.errors).to.have.length(1);
-    //   expect(res.body.errors[0]).to.equal('User cannot change permission');
-    // });
+    it('should disallow trying to change the permission - PUT - /user/:userId', async () => {
+      const res = await request
+        .put(`/user/${firstUserIdTest}`)
+        .set({ Authorization: `Bearer ${accessToken}` })
+        .send({
+          email: firstUserBody.email,
+          password: firstUserBody.password,
+          firstName: 'Marcos',
+          lastName: 'Silva',
+          avatar: 'marcos.jpg',
+          rol: 1
+        });
+      expect(res.status).to.equal(400);
+      expect(res.body.errors).to.be.an('array');
+      expect(res.body.errors).to.have.length(1);
+      expect(res.body.errors[0]).to.equal('User cannot change permission');
+    });
 
-    // it('should allow for testing - PUT - /user/:userId/rol/1', async () => {
-    //   const res = await request
-    //     .put(`/user/${firstUserIdTest}/rol/1`)
-    //     .set({ Authorization: `Bearer ${accessToken}` })
-    //     .send({});
-    //   expect(res.status).to.equal(204);
-    // });
+    it('should allow for testing - PUT - /user/:userId/rol/1', async () => {
+      const res = await request
+        .put(`/user/${firstUserIdTest}/rol/1`)
+        .set({ Authorization: `Bearer ${accessToken}` })
+        .send({});
+      expect(res.status).to.equal(204);
+    });
 
-    //   describe('with a new set of permission', () => {
-    //     it('should allow a refresh token - POST - /auth/refresh-token', async () => {
-    //       const res = await request
-    //         .post('/auth/refresh-token')
-    //         .set({ Authorization: `Bearer ${accessToken}` })
-    //         .send({ refreshToken });
-    //       expect(res.status).to.equal(201);
-    //       expect(res.body).not.to.be.empty;
-    //       expect(res.body).to.be.an('object');
-    //       expect(res.body.accessToken).to.be.a('string');
-    //       expect(res.body.accessToken).not.to.equal(accessToken);
-    //       refreshToken = res.body.refreshToken;
-    //     });
-    //     it('should allow edit user - PUT - /user/:userId', async () => {
-    //       const res = await request
-    //         .put(`/user/${firstUserIdTest}`)
-    //         .set({ Authorization: `Bearer ${accessToken}` })
-    //         .send({
-    //           email: firstUserBody.email,
-    //           password: firstUserBody.password,
-    //           firstName: newFirstName2,
-    //           lastName: newLastName2
-    //         });
-    //       expect(res.status).to.equal(204);
-    //     });
-    //     it('should allow and should have a new full name - GET - /user/:userId', async () => {
-    //       const res = await request
-    //         .get(`/user/${firstUserIdTest}`)
-    //         .set({ Authorization: `Bearer ${accessToken}` })
-    //         .send();
-    //       expect(res.status).to.equal(200);
-    //       expect(res.body).not.to.be.empty;
-    //       expect(res.body).to.be.an('object');
-    //       expect(res.body.id).to.be.a('string');
-    //       expect(res.body.firstName).to.equal(newFirstName2);
-    //       expect(res.body.lastName).to.equal(newLastName2);
-    //       expect(res.body.email).to.equal(firstUserBody.email);
-    //       expect(res.body.id).to.equal(firstUserIdTest);
-    //     });
-    //     it('should allow a delete user - DELETE - /user/:userId', async () => {
-    //       const res = await request
-    //         .delete(`/user/${firstUserIdTest}`)
-    //         .set({ Authorization: `Bearer ${accessToken}` })
-    //         .send();
-    //       expect(res.status).to.equal(204);
-    //     });
-    //   });
+    describe('with a new set of permission', () => {
+      it('should allow a refresh token - POST - /auth/refresh-token', async () => {
+        const res = await request
+          .post('/auth/refresh-token')
+          .set({ Authorization: `Bearer ${accessToken}` })
+          .send({ refreshToken });
+        expect(res.status).to.equal(201);
+        expect(res.body).not.to.be.empty;
+        expect(res.body).to.be.an('object');
+        expect(res.body.accessToken).to.be.a('string');
+        expect(res.body.accessToken).not.to.equal(accessToken);
+        refreshToken = res.body.refreshToken;
+      });
+      it('should allow edit user - PUT - /user/:userId', async () => {
+        const res = await request
+          .put(`/user/${firstUserIdTest}`)
+          .set({ Authorization: `Bearer ${accessToken}` })
+          .send({
+            email: firstUserBody.email,
+            password: firstUserBody.password,
+            firstName: newFirstName2,
+            lastName: newLastName2,
+            avatar: newAvatar2
+          });
+        expect(res.status).to.equal(204);
+      });
+      it('should allow and should have a new full name - GET - /user/:userId', async () => {
+        const res = await request
+          .get(`/user/${firstUserIdTest}`)
+          .set({ Authorization: `Bearer ${accessToken}` })
+          .send();
+        expect(res.status).to.equal(200);
+        expect(res.body).not.to.be.empty;
+        expect(res.body).to.be.an('object');
+        expect(res.body.id).to.be.a('string');
+        expect(res.body.firstName).to.equal(newFirstName2);
+        expect(res.body.lastName).to.equal(newLastName2);
+        expect(res.body.email).to.equal(firstUserBody.email);
+        expect(res.body.avatar).to.equal(newAvatar2);
+        expect(res.body.id).to.equal(firstUserIdTest);
+      });
+      it('should allow a delete user - DELETE - /user/:userId', async () => {
+        const res = await request
+          .delete(`/user/${firstUserIdTest}`)
+          .set({ Authorization: `Bearer ${accessToken}` })
+          .send();
+        expect(res.status).to.equal(204);
+      });
+    });
   });
 });

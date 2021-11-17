@@ -42,9 +42,10 @@ export class UserRoutes extends Route {
       body('password').isLength({ min: 5 }).withMessage('Must include password (5+ characters)'),
       body('firstName').isString(),
       body('lastName').isString(),
-      body('avatar').isObject().optional(),
+      body('avatar').isString().optional(),
       body('rol').isInt().optional(),
       bodyValidation.verifyBodyFieldsErrors,
+      userMiddleware.userCantChangePermission,
       userMiddleware.onlySameUserOrAdminCanDoThisAction,
       permission.rolRequired(Rol.AUTHENTICATE),
       userController.editUser
@@ -58,9 +59,10 @@ export class UserRoutes extends Route {
         .optional(),
       body('firstName').isString().optional(),
       body('lastName').isString().optional(),
-      body('avatar').isObject().optional(),
+      body('avatar').isString().optional(),
       body('rol').isInt().optional(),
       bodyValidation.verifyBodyFieldsErrors,
+      userMiddleware.userCantChangePermission,
       userMiddleware.onlySameUserOrAdminCanDoThisAction,
       permission.rolRequired(Rol.AUTHENTICATE),
       userController.patchUser
