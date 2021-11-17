@@ -1,26 +1,23 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-expressions */
 import { expect } from 'chai';
 import { afterEach, beforeEach } from 'mocha';
-import shortid from 'shortid';
 import supertest from 'supertest';
 import app from '../../../index';
+import {
+  firstUserBody,
+  newAvatar2,
+  newFirstName,
+  newFirstName2,
+  newLastName2
+} from './mock/user.mock';
 
 let firstUserIdTest = '';
-const firstUserBody = {
-  email: `example+${shortid.generate()}@example.com`,
-  password: 'Sup3rSecret!23'
-};
 let accessToken = '';
 let refreshToken = '';
-const newFirstName = 'Jose';
-const newFirstName2 = 'Paulo';
-const newLastName2 = 'Faraco';
-const newAvatar2 = 'paulo.jpg';
 
 let request: supertest.SuperAgentTest;
-beforeEach(async () => {
-  request = await supertest.agent(app);
+beforeEach(() => {
+  request = supertest.agent(app);
 });
 afterEach(() => {
   app.close();
