@@ -4,7 +4,7 @@
   "repository": "https://github.com/yasniel1408/api-node-myshop.git",
   "author": "Yasniel <yasnielfajardoegues1408@gmail.com>",
   "license": "MIT",
-  "main": "index.ts",
+  "main": "build/index.js",
   "scripts": {
     "tsc": "tsc",
     "prettier": "npx prettier . --write",
