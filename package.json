@@ -6,10 +6,11 @@
   "license": "MIT",
   "main": "build/index.js",
   "scripts": {
-    "tsc": "tsc",
+    "tsc": "tsc --build",
     "prettier": "npx prettier . --write",
     "eslint": "npx eslint . --fix --cache",
     "dev": "cross-env NODE_ENV=development ts-node-dev index.ts",
+    "start": "cross-env NODE_ENV=production node ./build/index.js",
     "debug": "cross-env NODE_ENV=development DEBUG=* ts-node-dev index.ts",
     "prod": "cross-env NODE_ENV=production tsc && node ./dist/index.js",
     "test": "cross-env NODE_ENV=test mocha -r ts-node/register 'src/**/*.test.ts' --unhandled-rejections=strict",
